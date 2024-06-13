@@ -1,0 +1,6 @@
+---
+# handlers file for mari-role
+- name: restart Apache
+  service:
+    name: "{{ service }}"
+    state: restarted

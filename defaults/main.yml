@@ -1,0 +1,4 @@
+---
+# defaults file for mari-role
+pkgname: apache2
+service: apache2

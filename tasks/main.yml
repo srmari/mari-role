@@ -1,0 +1,26 @@
+---
+# tasks file for mari-role
+- name: Update apt package index
+  apt:
+    update_cache: yes
+
+- name: Install Apache 
+  apt:
+    name: "{{pkgname}}"
+    state: present
+
+- name: Ensure the default Apache port is 8080
+  ansible.builtin.lineinfile:
+    path: /etc/apache2/ports.conf
+    regexp: '^Listen '
+    line: Listen 8080
+  notify:
+  - restart Apache
+
+- name: Configure hostname and IP in webpage
+  template: 
+    src: index.j2
+    dest: /var/www/html/index.html
+  notify:
+  - restart Apache
+
